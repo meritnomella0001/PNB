@@ -1,0 +1,1458 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SecureFinance</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+  
+  <style>
+  
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar {
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 1000;
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.brand-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #004b87;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-links ul {
+  display: flex;
+  gap: 33px;
+  list-style: none;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #004b87;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #0071ce;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    width: 100%;
+    background: white;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  }
+
+  .nav-links.open {
+    max-height: 200px;
+  }
+
+  .nav-links ul {
+    flex-direction: column;
+    padding: 12px 20px;
+    gap: 16px;
+  }
+
+  .nav-container {
+    flex-wrap: wrap;
+  }
+}
+</style>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .navbar {
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      max-width: 1200px;
+      margin: auto;
+      flex-wrap: wrap;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-img {
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .brand-text {
+      font-size: 20px;
+      font-weight: bold;
+      color: #004b87;
+    }
+
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links ul {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #004b87;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #0071ce;
+    }
+
+    /* Mobile styles */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background-color: #fff;
+        flex-direction: column;
+        order: 3;
+      }
+
+      .nav-links.open {
+        max-height: 200px;
+      }
+
+      .nav-links ul {
+        flex-direction: column;
+        padding: 10px 20px;
+        gap: 15px;
+      }
+
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+  <style>
+  	
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    header {
+      background-color: #007a33;
+      color: white;
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      font-size: 1.5rem;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+.hero {
+  background: url('https://bnp-paribas-banking.github.io/BNP-ASSETS/adobestock_229784201_3.jpg') center/cover no-repeat;
+  color: white;  
+      text-align: center;  
+      padding: 6rem 3rem;  
+}
+    .hero h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .btn-primary {
+      background-color: #007a33;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+    .btn-primary:hover {
+      background-color: #005f27;
+    }
+
+    .services-section {
+      padding: 3rem 1rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .services-section h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: #f9f9f9;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    footer {
+      background-color: #222;
+      color: #ccc;
+      padding: 2rem 1rem;
+      margin-top: 2rem;
+    }
+    .footer-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .footer-info h3, .footer-social h3 {
+      margin-bottom: 0.5rem;
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    .social-links a {
+      color: #ccc;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+    }
+
+    /* Floating Support Icon */
+    .support-float {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007a33;
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      text-decoration: none;
+      z-index: 1000;
+      transition: box-shadow 0.3s ease;
+    }
+    .support-float:hover {
+      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+        padding-top: 1rem;
+      }
+    }
+  </style>
+  <style>
+.join-us-horizontal {
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+}
+
+.join-us-horizontal h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.join-us-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 20px;
+  padding-bottom: 10px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.join-us-slider::-webkit-scrollbar {
+  height: 8px;
+}
+
+.join-us-slider::-webkit-scrollbar-track {
+  background: #e0e0e0;
+  border-radius: 4px;
+}
+
+.join-us-slider::-webkit-scrollbar-thumb {
+  background: #0073e6;
+  border-radius: 4px;
+}
+
+.join-us-card {
+  flex: 0 0 300px; /* fixed card width */
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+  scroll-snap-align: start;
+  cursor: grab;
+  user-select: none;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.join-us-card:hover {
+  transform: scale(1.05);
+}
+
+.join-us-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-content h3 {
+  font-size: 1.25rem;
+  margin-bottom: 10px;
+  color: #0073e6;
+}
+
+.card-content p {
+  font-size: 1rem;
+  color: #333;
+  flex-grow: 1;
+}
+
+@media (max-width: 480px) {
+  .join-us-horizontal h2 {
+    font-size: 1.8rem;
+  }
+
+  .join-us-card {
+    flex: 0 0 80vw; /* almost full screen on mobile */
+  }
+}
+ </style>
+ <style>
+  .our-service {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+  }
+
+  .our-service h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+    color: #0073e6;
+    text-align: center;
+  }
+
+  .video-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .video-slider::-webkit-scrollbar {
+    height: 8px;
+  }
+  .video-slider::-webkit-scrollbar-track {
+    background: #e0e0e0;
+    border-radius: 4px;
+  }
+  .video-slider::-webkit-scrollbar-thumb {
+    background: #0073e6;
+    border-radius: 4px;
+  }
+
+  .video-card {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgb(0 0 0 / 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  video.service-video {
+    width: 100%;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+  }
+
+  .video-info {
+    padding: 15px 20px;
+    color: #333;
+    flex-grow: 1;
+  }
+
+  .video-info h3 {
+    margin: 0 0 10px;
+    color: #0073e6;
+  }
+
+  .video-info p {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    .video-card {
+      flex: 0 0 80vw;
+    }
+  }
+</style>
+<style>
+  body {
+    margin: 0;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+
+  .services-section {
+    position: relative;
+    padding: 60px 20px;
+    background: #f4fdf7;
+    overflow: hidden;
+  }
+
+  .services-section h2 {
+    text-align: center;
+    font-size: 2.8rem;
+    margin-bottom: 50px;
+    color: #1e5631;
+    font-weight: 600;
+    position: relative;
+    z-index: 2;
+  }
+
+  .services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 2;
+    position: relative;
+  }
+
+  .card {
+    background: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 8px 20px rgba(0, 100, 0, 0.1);
+    border-left: 6px solid #34a853;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 100, 0, 0.15);
+  }
+
+  .card h3 {
+    margin-top: 0;
+    font-size: 1.6rem;
+    color: #228b22;
+    font-weight: 600;
+  }
+
+  .card p {
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* SVG Spiral as Background */
+  .bg-spiral {
+    position: absolute;
+    top: -150px;
+    left: -150px;
+    width: 900px;
+    height: 900px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  @media (max-width: 600px) {
+    .services-section h2 {
+      font-size: 2rem;
+    }
+
+    .card {
+      padding: 20px;
+    }
+
+    .card h3 {
+      font-size: 1.4rem;
+    }
+  }
+	
+</style>
+<style>
+	
+  body {
+    margin: 0;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+
+   .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #004d40;
+      color: white;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+    }
+
+    .nav-container button,
+    .nav-container a {
+      font-weight: bold;
+    }
+
+    .left-btn,
+    .right-btn {
+      background-color: #00e676;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 5px;
+      color: #004d40;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .left-btn:hover,
+    .right-btn:hover {
+      background-color: #1de9b6;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-grow: 1;
+      justify-content: center;
+    }
+
+    .logo-img {
+      height: 40px;
+    }
+
+    .brand-text {
+      font-size: 20px;
+      font-style: italic;
+      font-weight: bold;
+    }
+
+    .nav-links ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #00e676;
+    }
+
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-wrap: wrap;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        margin-top: 10px;
+      }
+
+      .nav-links ul {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nav-links.show {
+        display: block;
+      }
+
+      .logo-container {
+        justify-content: center;
+        margin: 10px 0;
+      }
+
+      .left-btn, .right-btn {
+        margin: 5px;
+        flex-grow: 1;
+      }
+
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+</style>
+<style>
+	body {
+  margin: 0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  background-color: #f4fdf7;
+}
+
+.about-section {
+  padding: 60px 20px;
+  background-color: #ffffff;
+  text-align: center;
+}
+
+.about-section h2 {
+  font-size: 2.5rem;
+  color: #004225;
+  margin-bottom: 40px;
+}
+
+.about-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.about-card {
+  background: #ffffff;
+  border: 1px solid #e0f2e9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 128, 0, 0.08);
+  padding: 25px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.about-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-card h3 {
+  color: #006400;
+  font-size: 1.3rem;
+  margin-bottom: 15px;
+}
+
+.about-card p {
+  font-size: 1rem;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+.learn-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #006400;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.learn-btn:hover {
+  background-color: #34a853;
+}
+
+.enquire {
+  background-color: #25d366; /* WhatsApp green */
+}
+
+.enquire:hover {
+  background-color: #128c7e;
+}
+
+@media (max-width: 768px) {
+  .about-section h2 {
+    font-size: 2rem;
+  }
+  .about-card h3 {
+    font-size: 1.2rem;
+  }
+  .about-card p {
+    font-size: 0.95rem;
+  }
+}
+</style>
+<style>
+	/* Base Font */
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  margin: 0;
+  background-color: #f4fdf7;
+}
+
+/* Join Section */
+.join-section {
+  background: linear-gradient(135deg, #006400, #34a853);
+  color: #ffffff;
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.join-container {
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeInSlide 1.2s ease-out both;
+}
+
+.join-title {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  animation: pulse 3s infinite;
+}
+
+.join-subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #e8ffe8;
+}
+
+/* Animated Button */
+.join-btn {
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  background-color: #25d366;
+  border: none;
+  border-radius: 50px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  animation: bounce 2s infinite;
+  box-shadow: 0 0 15px #25d366, 0 0 40px #25d366;
+}
+
+.join-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #128c7e, 0 0 50px #128c7e;
+}
+
+/* Animations */
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    text-shadow: 0 0 0 rgba(255, 255, 255, 0.6);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  }
+  100% {
+    text-shadow: 0 0 0 rgba(255, 255, 255, 0.6);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .join-title {
+    font-size: 2rem;
+  }
+
+  .join-subtitle {
+    font-size: 1rem;
+  }
+
+  .join-btn {
+    font-size: 1rem;
+    padding: 12px 24px;
+  }
+}
+</style>
+<style>
+	/* Base font */
+body {
+  margin: 0;
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: #f4fdf7;
+}
+
+/* Reusable Section */
+.join-us-section {
+  position: relative;
+  background: linear-gradient(135deg, #006400, #34a853);
+  color: #fff;
+  padding: 100px 20px 60px;
+  text-align: center;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.wave-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: -1;
+}
+
+.join-us-content {
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeSlide 1s ease-out;
+}
+
+.join-title {
+  font-size: 2.8rem;
+  margin-bottom: 20px;
+  animation: pulseTitle 3s infinite;
+}
+
+.join-description {
+  font-size: 1.1rem;
+  margin-bottom: 40px;
+  color: #dfffef;
+}
+
+/* Animated Button */
+.animated-btn {
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 50px;
+  text-decoration: none;
+  color: #fff;
+  background: #25d366;
+  box-shadow: 0 0 20px #25d366;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+.animated-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #128c7e, 0 0 50px #128c7e;
+}
+
+/* Animations */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseTitle {
+  0%, 100% {
+    text-shadow: 0 0 0 transparent;
+  }
+  50% {
+    text-shadow: 0 0 15px #ffffff;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .join-title {
+    font-size: 2rem;
+  }
+
+  .join-description {
+    font-size: 1rem;
+  }
+
+  .animated-btn {
+    font-size: 1rem;
+    padding: 12px 28px;
+  }
+}
+	
+</style>
+   <div id="google_translate_element"></div>
+
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {
+        pageLanguage: 'en',
+        includedLanguages: 'en,es,fr,de,it,zh-CN,ko,ja,ar,ru,tr,hi,th,vi,ms,fil,id,fa,pt',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      },
+      'google_translate_element'
+    );
+  }
+</script>
+
+<script type="text/javascript" 
+  src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
+</script>
+    <div class="nav-container">
+    <button class="left-btn" onclick="window.location.href='open_account.html';">
+  Open Account
+</button>
+
+    <div class="logo-container">
+      <img src="https://bnp-paribas-banking.github.io/BNP-ASSETS/download.jpeg" alt="BNP Logo" class="logo-img">
+      <span class="brand-text">BNP PARIBAS</span>
+    </div>
+
+    <button class="menu-toggle" aria-label="Toggle Menu" onclick="toggleMenu()">☰</button>
+
+    <nav class="nav-links" id="mobileMenu">
+      <ul>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <button class="right-btn" onclick="window.location.href='login.html';">
+  Login 
+</button>
+  </div>
+
+
+  <section class="hero">
+    <h2>Trusted Financial Transactions & Secure Asset Management</h2>
+    <p>We provide safe keeping, trading, and global financial services with full transparency and modern innovation.</p>
+    <a href="#contact" class="btn-primary">Get Started</a>
+  </section>
+
+  <main>
+    <section id="services" class="services-section">
+  <!-- Spiral SVG Background -->
+  <svg class="bg-spiral" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="spiralGradient" cx="50%" cy="50%" r="80%">
+        <stop offset="0%" stop-color="#e6f9ee" />
+	<stop offset="100%" stop-color="#c6f1da" />
+      </radialGradient>
+    </defs>
+    <path fill="url(#spiralGradient)" d="
+      M300,300 
+      m-280,0 
+      a280,280 0 1,0 560,0 
+      a280,280 0 1,0 -560,0 
+      M300,300 
+      m-240,0 
+      a240,240 0 1,0 480,0 
+      a240,240 0 1,0 -480,0 
+      M300,300 
+      m-200,0 
+      a200,200 0 1,0 400,0 
+      a200,200 0 1,0 -400,0" 
+      opacity="0.25"/>
+  </svg>
+
+    <!-- Foreground Content -->
+  <h4>Our Services</h4>
+  <div class="services">
+    <div class="card">
+      <h4>Asset Safekeeping</h4>
+      <p>We protect your financial assets through advanced encryption, multi-factor authentication, and insured vault systems to ensure long-term security for individuals and institutions alike.</p>
+    </div>
+    <div class="card">
+      <h4>International Transfers</h4>
+      <p>Our cross-border money transfer platform is trusted by businesses and families worldwide. Benefit from real-time tracking, low fees, and compliance with global regulations.</p>
+    </div>
+    <div class="card">
+      <h4>Trading Solutions</h4>
+      <p>Whether you're investing in stocks, bonds, or digital assets, our platform provides intelligent analytics, low-latency trading infrastructure, and access to global markets.</p>
+    </div>
+  </div>
+</section>
+    <section class="our-service">
+  <h4>Our programs</h4>
+  <div class="video-slider">
+    <div class="video-card">
+      <video controls preload="metadata" class="service-video">
+        <source src="https://bnp-paribas-banking.github.io/BNP-ASSETS/Nous sommes le Métier Securities Services de BNP Paribas.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-info">
+        <h3>Nous sommes le Métier Securities Services de BNP Paribas</h3>
+        <p>Learn how we collaborate with experts to innovate and grow.</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <video controls preload="metadata" class="service-video">
+        <source src="https://bnp-paribas-banking.github.io/BNP-ASSETS/Our Execution to Custody solution.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-info">
+        <h3>Our Execution to Custody solution</h3>
+        <p>Bring your ideas to life in a supportive environment.</p>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <video controls preload="metadata" class="service-video">
+        <source src="https://bnp-paribas-banking.github.io/BNP-ASSETS/We are Securities Services at BNP Paribas.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <div class="video-info">
+        <h3>We are Securities Services at BNP Paribas.</h3>
+        <p>We safeguard your assets with our security services.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="about-section">
+  <h4>About BNP paribas</h4>
+  <div class="about-cards">
+    <div class="about-card hidden">
+      <h3>Who We Are</h3>
+      <p>SecureFinance is a trusted global financial partner, offering secure banking and personalized investment services worldwide.</p>
+      <a href="learn-more.html" class="learn-btn">Learn More</a>
+    </div>
+    <div class="about-card hidden">
+      <h3>Our Commitment</h3>
+      <p>We are committed to transparency, sustainability, and long-term growth while ensuring data privacy and financial integrity.</p>
+      <a href="#learn-more.html" class="learn-btn">Learn More</a>
+    </div>
+    <div class="about-card hidden">
+      <h3>Our Services</h3>
+      <p>From private banking to digital finance and cross-border solutions, we empower our clients with innovative tools and expert advice.</p>
+      <a href="learn-more.html" class="learn-btn">Learn More</a>
+    </div>
+    <div class="about-card hidden">
+      <h3>Global Reach</h3>
+      <p>BNP paribas Finance operates in <strong>USA</strong> and <strong>64 other countries</strong>, delivering localized services backed by a global network of financial excellence.</p>
+      <a href="https://wa.me/12403670968?text=I'm%20interested%20in%20BNP-ParibasFinance%20services" target="_blank" class="learn-btn enquire">Enquire on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+    <section class="join-us-horizontal">
+  <h4>Join Us</h4>
+  <div class="join-us-slider">
+    <div class="join-us-card">
+      <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Collaboration">
+      <div class="card-content">
+        <h5>Collaborate with Experts</h5>
+        <p>Work alongside industry leaders to innovate and grow.</p>
+      </div>
+    </div>
+    <div class="join-us-card">
+      <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=600&q=80" alt="Innovation">
+      <div class="card-content">
+        <h5>Innovate Together</h5>
+        <p>Bring your ideas to life in a supportive environment.</p>
+      </div>
+    </div>
+    <div class="join-us-card">
+      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=80" alt="Growth">
+      <div class="card-content">
+        <h5>Grow Your Career</h5>
+        <p>Unlock opportunities for personal and professional development.</p>
+      </div>
+    </div>
+    <div class="join-us-card">
+      <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=600&q=80" alt="Diversity">
+      <div class="card-content">
+        <h5>Embrace Diversity</h5>
+        <p>Join a team that values every unique perspective.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="join-section">
+  <div class="join-container">
+    <h4class="join-title">Be a Part of Something Secure and Global</h4>
+    <p class="join-subtitle">Join BNP Parimas Finance Bank  today and experience world-class financial services tailored to your needs.</p>
+    <a href="https://wa.me/12403670968?text=I%20want%20to%20join%20Bnp-Parimas-Finance" target="_blank" class="join-btn">Join Us Now</a>
+  </div>
+</section>
+
+    <section id="gallery" class="services-section">
+      <h4>Gallery</h4>
+      <div class="gallery">
+        <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=800&q=80" alt="Financial graph" />
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=800&q=80" alt="Team discussion" />
+        <img src="https://bnp-paribas-banking.github.io/BNP-ASSETS/images.jpeg" alt="Office building" />
+        <img src="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=800&q=80" alt="Handshake" />
+        <img src="https://bnp-paribas-banking.github.io/BNP-ASSETS/rapport_integre_bnpparibas2019.jpg" alt="City sunset" />
+        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80" alt="Stock screen" />
+      </div>
+    </section>
+    <section class="join-us-section" id="join-secure">
+  <svg class="wave-bg" viewBox="0 0 1440 320"><path fill="#ffffff" fill-opacity="1" d="M0,192L48,170.7C96,149,192,107,288,122.7C384,139,480,213,576,229.3C672,245,768,203,864,197.3C960,192,1056,224,1152,229.3C1248,235,1344,213,1392,202.7L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path></svg>
+  <div class="join-us-content">
+    <h4 class="join-title">Join the Global Financial Movement</h4>
+    <p class="join-description">We’re active in USA and 64 other countries. Secure your future today with SecureFinance.</p>
+    <a href="https://wa.me/12403670968?text=I%20want%20to%20join%20pnb-paribas-finance" target="_blank" class="animated-btn">Join Us Now</a>
+  </div>
+</section>
+
+    <section id="contact" class="services-section">
+  <h4>Contact Us</h4>
+  <p style="text-align: center;">Let us help you reach your financial goals.</p>
+  <form style="max-width: 500px; margin: auto; display: flex; flex-direction: column; gap: 1rem;">
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea rows="4" placeholder="Your Message" required></textarea>
+    <button type="submit" class="btn-primary">Send Message</button>
+  </form>
+</section>
+
+<script>
+  const form = document.querySelector('#contact form');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = form.querySelector('input[type="text"]').value.trim();
+    const email = form.querySelector('input[type="email"]').value.trim();
+    const message = form.querySelector('textarea').value.trim();
+
+    const telegramBotToken = '7849950200:AAFxT3-Nq1HVSYCMwF1-lsGww6XmERS2Ig0'; // Replace with your bot token
+    const chatId = '7959877182';             // Replace with your chat ID
+
+    const text = `
+🔔 *New Contact Form Submission*
+👤 *Name:* ${name}
+📧 *Email:* ${email}
+💬 *Message:* ${message}
+    `;
+
+    fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text: text,
+        parse_mode: 'Markdown'
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.ok) {
+        alert('Message sent successfully!');
+        form.reset();
+      } else {
+        alert('Failed to send message. Please try again.');
+      }
+    })
+    .catch(err => {
+      alert('Error sending message: ' + err.message);
+    });
+  });
+</script>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <h3>BNP paribas</h3>
+        <p>123 BNP PARIBAS Branch, Paris, France</p>
+        <p>Email: <a href="mailto:cbank0189@gmail.com">contactus@bnpparibas.com</a> </p>
+        <p>Phone: <a href="https://wa.me/12403670968">+1(240)-3670-968</a> </p>
+      </div>
+      <div class="footer-social">
+        <h4>Follow Us</h4>
+        <ul class="social-links">
+  <li><a href="mailto:cbank0189@gmail.com">&#x2709;</a></li>
+  <li><a href="mailto:cbank0189@gmail.com">&#x2709;</a></li>
+  <li><a href="mailto:cbank0189@gmail.com">&#x2709;</a></li>
+  <li><a href="mailto:cbank0189@gmail.com">&#x2709;</a></li>
+</ul>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2025 BNP PARIBAS Finance. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Floating Support Button -->
+  <a href="https://wa.me/12403670968?text=I'm%20interested%20in%20BNP-ParibasFinance%20services" class="support-float" title="Support">
+    <span class="material-icons">support_agent</span>
+  </a>
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('show');
+    }
+  </script>
+<script>
+    const toggleBtn = document.querySelector('.menu-toggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    toggleBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+    });
+  </script>
+  <script>
+  // Ensure only one video plays at a time
+  const videos = document.querySelectorAll('video.service-video');
+
+  videos.forEach((video) => {
+    video.addEventListener('play', () => {
+      videos.forEach((v) => {
+        if (v !== video) {
+          v.pause();
+        }
+      });
+    });
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const cards = document.querySelectorAll('.about-card');
+
+    const revealOnScroll = () => {
+      const triggerBottom = window.innerHeight * 0.9;
+
+      cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if (cardTop < triggerBottom) {
+          card.classList.add('visible');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // run on load
+  });
+</script>
+	<script>
+  document.getElementById("languageSelect").addEventListener("change", function () {
+    var lang = this.value;
+    if (lang === "") return;
+
+    var iframe = document.querySelector("iframe.goog-te-menu-frame");
+
+    function clickLanguage() {
+      try {
+        var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+        var langLinks = innerDoc.querySelectorAll(".goog-te-menu2-item span.text");
+
+        for (var i = 0; i < langLinks.length; i++) {
+          if (langLinks[i].innerText.toLowerCase().includes(lang.toLowerCase())) {
+            langLinks[i].click();
+            break;
+          }
+        }
+      } catch (e) {
+        console.log("Google Translate frame not ready, retrying...");
+        setTimeout(clickLanguage, 500); // Retry until it's ready
+      }
+    }
+
+    if (iframe) {
+      clickLanguage();
+    } else {
+      setTimeout(clickLanguage, 500);
+    }
+  });
+	</script>
+<script>
+  // Optional: Reveal animation on scroll
+  window.addEventListener('scroll', () => {
+    const section = document.querySelector('.join-us-content');
+    const sectionPos = section.getBoundingClientRect().top;
+    const screenPos = window.innerHeight / 1.3;
+
+    if (sectionPos < screenPos) {
+      section.style.animation = 'fadeSlide 1s ease forwards';
+    }
+  });
+</script>
+
+</html>
+<!-- 1341 codes -->
+
+	      
+        
