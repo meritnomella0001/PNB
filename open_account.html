@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BNP account creation</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.42.3/dist/umd/supabase.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      background: white;
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #00945e;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #00945e;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #007e4c;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px;
+        padding: 15px;
+      }
+    }
+  </style>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+  <script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {
+        pageLanguage: 'en',
+        includedLanguages: 'tr,th,ko,ja,en,fr,de,it,es,ru,pt,pl,nl,uk,zh-CN,hi,id,vi,ar,fa,ms,fil,bn,ro,el,hu,cs,sk,sv,no,da,fi,he,ur,te,ml,my,ne',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      },
+      'google_translate_element'
+    );
+  }
+  </script>
+    	<div id="google_translate_element"></div>
+  
+
+<div class="container">
+  <h4>Create BNP Account</h4>
+  <h5>we are required by laws to take your information for accounts creation </h5>
+  <form id="signupForm">
+    <input type="text" name="first_name" placeholder="First Name" required />
+    <input type="text" name="last_name" placeholder="Last Name" required />
+    <input type="date" name="dob" placeholder="Date of Birth" required />
+    <select name="gender" required>
+      <option value="" disabled selected>Select Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </select>
+    <input type="text" name="nationality" placeholder="Nationality" required />
+    <input type="text" name="passport_id" placeholder="Passport ID" required />
+    <input type="email" name="email" placeholder="Email" required />
+    <input type="text" name="phone" placeholder="Phone Number" required />
+    <input type="text" name="country" placeholder="Country" required />
+    <input type="text" name="state" placeholder="State" required />
+    <input type="text" name="full_address" placeholder="Full Address" required />
+    <input type="text" name="username" placeholder="Username" required />
+    <input type="password" name="password" placeholder="Password" required />
+    <input type="text" name="kin_name" placeholder="Next of Kin Name" required />
+    <input type="text" name="kin_relationship" placeholder="Relationship with Kin" required />
+    <input type="text" name="kin_phone" placeholder="Next of Kin Phone" required />
+    <input type="email" name="kin_email" placeholder="Next of Kin Email" required />
+    <input type="text" name="kin_country" placeholder="Next of Kin Country" required />
+    <input type="text" name="kin_state" placeholder="Next of Kin State" required />
+    <select name="account_type" required>
+      <option value="" disabled selected>Select Account Type</option>
+      <option value="savings">Savings</option>
+      <option value="checking">Checking</option>
+    </select>
+    <button type="submit">Create Account</button>
+  </form>
+</div>
+
+<script>
+  const supabase = window.supabase.createClient(
+    'https://mslojedoggqjhejwploj.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1zbG9qZWRvZ2dxamhlandwbG9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDk2MDA1MjIsImV4cCI6MjA2NTE3NjUyMn0.DTXwc0MXVQsQA77v3f2oPv6D19pP96j8ZBHGWFr_6_0'
+  );
+
+  function generateAccountNumber() {
+    return Math.floor(1000000000 + Math.random() * 9000000000).toString();
+  }
+
+  document.getElementById("signupForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const values = Object.fromEntries(formData.entries());
+
+    values.account_number = generateAccountNumber(); // Auto-generated account number
+
+    const { data, error } = await supabase.from("users").insert([values]);
+
+    if (error) {
+      alert("Error creating account: " + error.message);
+      console.error(error);
+    } else {
+      alert("Account created successfully. Account Number: " + values.account_number);
+      this.reset();
+    }
+  });
+</script>
+</body>
+</html>
