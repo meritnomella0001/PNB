@@ -8,13 +8,13 @@
   "theme_color": "#004085",
   "icons": [
     {
-      "src": "/images.png",
-      "sizes": "447x447",
+      "src": "/images-ezgif.com-resize (1).png",
+      "sizes": "512x512",
       "type": "image/png"
     },
     {
-      "src": "/images.jpg",
-      "sizes": "447x447",
+      "src": "/images-ezgif.com-resize (1).png",
+      "sizes": "512x512",
       "type": "image/png"
     }
   ]
