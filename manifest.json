@@ -4,6 +4,9 @@
   "description": "Securely manage your finances and investments with PNB Finance.",
   "start_url": "/",
   "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#004085",
   "background_color": "#ffffff",
   "theme_color": "#004085",
   "icons": [
