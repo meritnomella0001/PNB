@@ -1,6 +1,7 @@
 {
   "name": "PNB Finance",
   "short_name": "PNBFinance",
+  "description": "Securely manage your finances and investments with PNB Finance.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
