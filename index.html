@@ -1461,6 +1461,27 @@ if ('serviceWorker' in navigator) {
   });
 }
 	</script>
+<button id="installBtn" style="display:none;position:fixed;bottom:20px;right:20px;padding:10px 20px;background:#004085;color:white;border:none;border-radius:8px;z-index:9999;">Install App</button>
+
+<script>
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = 'block';
+});
+
+installBtn.addEventListener('click', () => {
+  installBtn.style.display = 'none';
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
+  }
+});
+</script>
+	
 
 </html>
 <!-- 1341 codes -->
