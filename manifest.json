@@ -1,4 +1,5 @@
-{
+{ 
+  "id": "com.pnbfinance.app",
   "name": "PNB Finance",
   "short_name": "PNBFinance",
   "description": "Securely manage your finances and investments with PNB Finance.",
