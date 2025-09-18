@@ -1,8 +1,8 @@
 const CACHE_NAME = 'pnbfinance-cache-v1';
 const urlsToCache = [
   '/',                  // Main page
-  '/images.jpg',
-  '/images.jpg'
+  '/images-ezgif.com-resize (1).png',
+  '/images-ezgif.com-resize (1).png'
 ];
 
 // Install – cache essential files
